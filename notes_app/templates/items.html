@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{%block content %}
+<div class="container mx-5 my-4">
+    {% if allitems.all()|length==0 %}
+    <div class="alert alert-secondary" role="alert">
+      No Records Availabel
+    </div>
+    {% else %}
+   
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S No.</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+
+         
+            {% for item in allitems %}
+            <tr>
+              <th scope="row">{{loop.index}}</th>
+              <td>{{item.title}}</td>
+              <td>{{item.desc}}</td>
+              <td>{{item.date_created.strftime("%H:%M %Y-%m-%d  ")}}</td>
+              <td>
+                <a href="/update/{{item.sno}}" class="btn btn-outline-dark btn-sm mx-1">Update</a>
+                <a href="/delete/{{item.sno}}" class="btn btn-outline-dark btn-sm mx-1">Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+         
+          
+         
+        </tbody>
+      </table>
+      {% endif %}
+</div>
+{%endblock%}
